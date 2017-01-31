@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,600');
+@import "logo.scss";
+
+body {
+  font-family: 'Fira Sans', sans-serif;
+  color: #ddd;
+  background-color: #1f1f1f;
+}
+
+h1, h2 {
+  margin: .2em auto;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+header {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  color: #ddd;
+}
+
+#scene {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.hero-text {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: inset 0 0 0 15px #fff;
+}
+
+.social {
+  display: block;
+  margin: 1.2em 0 3em 0;
+  a {
+    color: #aaa;
+    text-decoration: none;
+    padding: .5em;
+    font-size: 1.3em;
+    transition: color .3s ease;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
