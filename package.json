@@ -1,0 +1,22 @@
+{
+  "name": "jonshamir.com",
+  "version": "1.0.0",
+  "description": "Jon Shamir home page",
+  "author": "Jon Shamir",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "webpack-dev-server -d",
+    "build": "webpack -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonshamir/jonshamir.com.git"
+  },
+  "devDependencies": {
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.2.1"
+  },
+  "dependencies": {
+    "normalize.css": "^5.0.0"
+  }
+}
