@@ -46,8 +46,9 @@ vec3 contours(float x, float levels) {
 
   float y = smoothstep(df*2.5, df*3.0, f) + smoothstep(df*0.5, df*-0.0, f);
 
+  // Invert colors & reduce contrast
   y = 1.0 - y;
-  y = 0.04*y + 0.12;
+  y = 0.06 * y + 0.12;
   return vec3(y);
 }
 

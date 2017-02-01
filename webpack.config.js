@@ -1,6 +1,8 @@
 /* eslint-disable */
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var PATHS = {
   entry: path.resolve('./src/index'),
@@ -26,7 +28,7 @@ var config = {
       {
         test: /\.(jpg|png|gif|svg)$/,
         include: /src\/assets/,
-        loaders: ['url?limit=10000&name=assets/images/[name].[ext]', 'img-loader']
+        use: ['url?limit=10000&name=assets/images/[name].[ext]', 'img-loader']
       },
       {
         test: /\.js$/,
@@ -34,15 +36,15 @@ var config = {
       },
       {
         test: /\.(css|scss)$/,
-        loaders: ['style-loader', 'css-loader', 'autoprefixer-loader', 'sass-loader']
+        use: ['style-loader', 'css-loader', 'autoprefixer-loader', 'sass-loader']
       },
       {
         test: /\.(eot|ttf|woff|woff2|svg)$/,
-        loaders: ['file-loader?name=assets/fonts/[name].[ext]']
+        use: ['file-loader?name=assets/fonts/[name].[ext]']
       },
       {
         test: /\.(frag|vert|glsl)$/,
-        loaders: ['webpack-glsl-loader']
+        use: ['webpack-glsl-loader']
       }
     ]
   }
@@ -54,20 +56,26 @@ if (process.env.npm_lifecycle_event == 'build') {
   config.entry = PATHS.entry;
   config.output.publicPath = '/';
 
-  config.module.loaders[2].loaders = [];
-  config.module.loaders[2].loader = ExtractTextPlugin.extract('style', 'css?modules!autoprefixer!sass');
+  config.module.rules[2].use = ExtractTextPlugin.extract({
+    fallbackLoader: 'style-loader',
+    loader: ['css-loader', 'autoprefixer-loader', 'sass-loader']
+  });
 
-  config.plugins = config.plugins.concat([
-    new ExtractTextPlugin('main.css', {
+  config.plugins = [
+    new ExtractTextPlugin({
+      filename: 'main.css',
+      disable: false,
       allChunks: true
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ]);
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'src/index.html',
+      favicon: 'src/favicon.ico',
+      inject: false
+    }),
+  ];
 }
+
 // Dev only configuration
 else {
   config.devtool = 'eval';
