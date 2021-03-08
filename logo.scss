@@ -1,5 +1,5 @@
 $size: 4px;
-$width: 5*$size;
+$width: 5 * $size;
 $colors: #ddd, #bbb, #ddd, #fff, #bbb, #fff;
 
 @function pow($number, $exponent) {
@@ -25,39 +25,44 @@ $colors: #ddd, #bbb, #ddd, #fff, #bbb, #fff;
 
   & * {
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%;
+    left: 50%;
     transform-style: preserve-3d;
   }
   &:hover .rotate {
-    transform: rotateY(-45deg);
+    transform: rotateY(325deg);
   }
 }
 
 @mixin box($width, $height) {
   .face {
     position: absolute;
-    margin: (-.5*$height) (-.5*$width);
-    width: $width; height: $height;
+    margin: (-0.5 * $height) (-0.5 * $width);
+    width: $width;
+    height: $height;
   }
 
   .face:nth-child(n + 5) {
-    margin-top: -.5*$width;
+    margin-top: -0.5 * $width;
     height: $width;
   }
 
   @for $i from 0 to 6 {
     .face:nth-child(#{$i + 1}) {
-      transform:
-        if($i < 4, rotateY($i*90deg), rotateX(pow(-1, $i)*90deg))
-        translateZ(.5*if($i < 4, $width, $height));
-      background: nth($colors, $i+1);
+      transform: if($i < 4, rotateY($i * 90deg), rotateX(pow(-1, $i) * 90deg))
+        translateZ(0.5 * if($i < 4, $width, $height));
+      background: nth($colors, $i + 1);
     }
   }
 }
 
 @keyframes rotate {
-  0% { transform: rotateY(90deg); }
-  100% { transform: rotateY(0deg); }
+  0% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
 }
 
 .logo {
@@ -66,25 +71,25 @@ $colors: #ddd, #bbb, #ddd, #fff, #bbb, #fff;
 
 .rotate {
   animation: rotate 1s ease-out;
-  transition: transform 300ms ease;
+  transition: transform 800ms ease;
 }
 
 .top {
-  transform: rotateZ(90deg) translate(-10*$size, 5*$size);
-  @include box($width, 12*$size);
+  transform: rotateZ(90deg) translate(-10 * $size, 5 * $size);
+  @include box($width, 12 * $size);
 }
 
 .bottom {
-  transform: rotateZ(90deg) translate3d(10*$size, -5*$size, 0);
-  @include box($width, 12*$size);
+  transform: rotateZ(90deg) translate3d(10 * $size, -5 * $size, 0);
+  @include box($width, 12 * $size);
 }
 
 .middle {
   transform: rotateZ(90deg);
-  @include box($width, 22*$size);
+  @include box($width, 22 * $size);
 }
 
 .side {
-  transform: translate3d(8.5*$size, 5*$size, 0);
-  @include box($width, 6*$size);
+  transform: translate3d(8.5 * $size, 5 * $size, 0);
+  @include box($width, 6 * $size);
 }
