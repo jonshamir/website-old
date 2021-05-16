@@ -39,8 +39,8 @@ float snoise(vec2 v) {
 vec3 contours(float x, float levels) {
   float f = fract(x * levels);
   float df = fwidth(x * levels);
-
-  float y = smoothstep(df*2.5, df*3.0, f) + smoothstep(df*0.5, df*-0.0, f);
+  
+  float y = smoothstep(df*4., df*4.5, f) + smoothstep(df*0.5, df*-0.0, f);
 
   // Invert colors & reduce contrast
   y = 1.0 - y;
@@ -78,10 +78,10 @@ void main() {
   float x = fract(DF);
 
   // Mouse warp
-  x -= 0.1*(1.0 - clamp(0.0, 1.0, distance(st, mouse)));
+  x -= 0.1*pow((1.0 - clamp(0.0, 1.0, distance(st, mouse))), 2.0);
 
-  // Turn to contours
-  color = contours(x, 8.0);
+  color = contours(x, 7.0);
+  //color = vec3(x,x,x);
 
   gl_FragColor = vec4(color, 1.0);
 }
